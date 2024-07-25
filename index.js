@@ -1,6 +1,7 @@
 //importing express
 const express = require('express');
 const UserRouter = require('./routers/UserRouter');
+const UserProduct = require('./routers/ProductRouter')
 
 //initializing express
 const app = express();
@@ -10,6 +11,7 @@ const port = 5000;
 
 app.use(express.json());
 app.use('/user',UserRouter)
+app.use('/product',UserProduct);
 
 
 app.get('/',(req,res)=>{

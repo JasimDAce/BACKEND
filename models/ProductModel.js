@@ -7,4 +7,4 @@ const mySchema = new Schema({
     weight : Number
 })
 
-module.exports = ('product',mySchema);
+module.exports = model('product',mySchema);

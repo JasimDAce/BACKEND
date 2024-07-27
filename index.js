@@ -1,7 +1,8 @@
 //importing express
 const express = require('express');
 const UserRouter = require('./routers/UserRouter');
-const UserProduct = require('./routers/ProductRouter')
+const UserProduct = require('./routers/ProductRouter');
+const UserCart = require('./routers/CartRouter');
 
 //initializing express
 const app = express();
@@ -12,6 +13,7 @@ const port = 5000;
 app.use(express.json());
 app.use('/user',UserRouter)
 app.use('/product',UserProduct);
+app.use('/cart', UserCart);
 
 
 app.get('/',(req,res)=>{
@@ -25,7 +27,7 @@ app.get('/getall',(req,res) => {
     res.send('response from getall');
 })
 app.get('/update',(req,res) => {
-    res.send('response from update')
+    res.send('response from update');
 })
 
 //first parameter for address and second for call back

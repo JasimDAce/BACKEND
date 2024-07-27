@@ -1,14 +1,10 @@
 const express = require('express');
-const Model = require('../models/ProductModel');
+const Model = require('../models/CartModel');
 
-const router = express.Router();
+const router = express();
 
-router.post('/add',(req,res)=>{
-    console.log(req.body);
-
-    //asynchronous that why we will get promise obj
+router.post('/addtocart',(req,res) => {
     new Model(req.body).save()
-    //thenc is the shortcut
     .then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
@@ -17,7 +13,7 @@ router.post('/add',(req,res)=>{
     });
 })
 
-router.get('/getall',(req,res) => {
+router.get('/getall',(req,res)=>{
     Model.find()
     .then((result) => {
         res.status(200).json(result)
@@ -26,8 +22,9 @@ router.get('/getall',(req,res) => {
         res.status(500).json(err);
     });
 })
-router.get('/getbyname/:name', (req,res) => {
-    Model.find({name: req.params.name})
+
+router.get('/getbyid/:id',(req,res) => {
+    Model.findById(req.params.id)
     .then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
@@ -35,6 +32,7 @@ router.get('/getbyname/:name', (req,res) => {
         res.status(500).json(err);
     });
 })
+
 router.delete('/deletebyid/:id',(req,res) => {
     Model.findByIdAndDelete(req.params.id)
     .then((result) => {
@@ -43,7 +41,7 @@ router.delete('/deletebyid/:id',(req,res) => {
         console.log(err);
         res.status(500).json(err);
     });
-});
+})
 
 router.put('/updatebyid/:id',(req,res) => {
     Model.findByIdAndUpdate(req.params.id,req.body,{new : true})
@@ -54,5 +52,6 @@ router.put('/updatebyid/:id',(req,res) => {
         res.status(500).json(err);
     });
 })
+
 
 module.exports = router;

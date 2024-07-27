@@ -3,6 +3,7 @@ const express = require('express');
 const UserRouter = require('./routers/UserRouter');
 const UserProduct = require('./routers/ProductRouter');
 const UserCart = require('./routers/CartRouter');
+const cors = require('cors');
 
 //initializing express
 const app = express();
@@ -10,6 +11,10 @@ const app = express();
 const port = 5000;
 //middleware
 
+//used for allowing the backend to use frontend data
+app.use( cors({
+    origin: ['http://localhost:3000'],
+}));
 app.use(express.json());
 app.use('/user',UserRouter)
 app.use('/product',UserProduct);
